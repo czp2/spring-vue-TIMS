@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xxxy.mapper.AdminMapper">
+
+    <!--查询全部管理员,返回list集合-->
+    <select id="queryAllAdmin" resultType="Admin">
+        select * from admin
+    </select>
+
+
+    <!--增加一个User-->
+    <insert id="addUser" parameterType="User">
+      insert into user(uname,upwd,email)
+      values (#{uname}, #{upwd}, #{email})
+   </insert>
+    <!--根据id删除一个用户-->
+    <delete id="deleteUserById" parameterType="int">
+        delete from user where uid=#{id}
+    </delete>
+    <!--修改用户-->
+    <update id="updateUser" parameterType="User">
+        update user set uname=#{uname},upwd=#{upwd},email=#{email} where uid=#{uid}
+    </update>
+    <!--根据id查询,返回一个用户-->
+    <select id="queryUserById" resultType="User" parameterType="int">
+        select * from user where uid=#{id}
+    </select>
+    <!--查询全部用户,返回list集合-->
+    <select id="queryAllUser" resultType="User" parameterType="map">
+        select * from user limit #{currIndex} , #{pageSize}
+    </select>
+    <!--返回用户数量-->
+    <select id="queryUserCounts" resultType="int">
+        select count(*)  from user
+    </select>
+    <!--根据email查询,返回一个用户-->
+    <select id="queryUserByEmail" resultType="User" parameterType="java.lang.String">
+        select * from user where email=#{email}
+    </select>
+
+
+    <!--增加一个景点-->
+    <insert id="addViews" parameterType="Views">
+      insert into views(vname, address, details, ticket,nov, line)
+      values (#{vname}, #{address}, #{details}, #{ticket}, #{nov}, #{line})
+   </insert>
+    <!--根据id删除一个景点-->
+    <delete id="deleteViewsById" parameterType="int">
+        delete from views where vid=#{id}
+    </delete>
+    <!--修改景点-->
+    <update id="updateViews" parameterType="Views">
+        update views set vname=#{vname},address=#{address},details=#{details},ticket=#{ticket},nov=#{nov},line=#{line}
+        where vid=#{vid}
+    </update>
+    <!--根据id查询,返回一个景点-->
+    <select id="queryViewsById" resultType="Views" parameterType="int">
+        select * from views where vid=#{id}
+    </select>
+    <!--查询全部景点,返回list集合-->
+    <select id="queryAllViews" resultType="Views" parameterType="map">
+        select * from views limit #{currIndex} , #{pageSize}
+    </select>
+    <!--返回景点数量-->
+    <select id="queryViewsCounts" resultType="int">
+        select count(*)  from views
+    </select>
+
+    <!--增加一个评价-->
+    <insert id="addComment" parameterType="Comment">
+      insert into comment(uid, vid, content, star, createtime)
+      values (#{uid}, #{vid}, #{content}, #{star}, #{createtime})
+   </insert>
+    <!--根据id删除一个评价-->
+    <delete id="deleteCommentById" parameterType="int">
+        delete from comment where cid=#{id}
+    </delete>
+    <!--修改评价-->
+    <update id="updateComment" parameterType="Comment">
+        update comment set uid=#{uid},vid=#{vid},content=#{content},star=#{star},createtime=#{createtime}
+        where cid=#{cid}
+    </update>
+    <!--根据id查询,返回一个评价-->
+    <select id="queryCommentById" resultType="Comment" parameterType="int">
+        select * from comment where cid=#{id}
+    </select>
+    <!--查询全部评价,返回list集合-->
+    <select id="queryAllComment" resultType="Comment" parameterType="map">
+        select * from comment limit #{currIndex} , #{pageSize}
+    </select>
+    <!--返回评价数量-->
+    <select id="queryCommentCounts" resultType="int">
+        select count(*)  from comment
+    </select>
+    <!--根据景点vid返回所有评价-->
+    <select id="queryVidComment" resultType="Comment" parameterType="int">
+        select * from comment where vid=#{id}
+    </select>
+
+
+</mapper>
